@@ -18,7 +18,7 @@ interface params {
 }
 
 declare module "discord-interactions" {
-  export class InteractionsClient {
+  class InteractionsClient {
     constructor(token: string, clientID: string);
     private token: string;
     private clientID: string;
@@ -28,7 +28,7 @@ declare module "discord-interactions" {
     public deleteCommand(commandID: string, guildID?: string): Promise<AxiosResponse>;
   }
 
-  export interface interactionCreate {
+  interface interactionCreate {
     channel: Discord.TextChannel;
     guild: Discord.Guild;
     member: Discord.GuildMember | null;
