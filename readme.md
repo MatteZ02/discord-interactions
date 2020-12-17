@@ -122,7 +122,7 @@ const token = "Your unique bot token";
 client.interactions = new interactions.Client(token, "You bots user id");
 
 // attach and event listener for the ready event
-client.on("ready" => {
+client.on("ready", () => {
     console.log("Client is ready!");
 
 // Create a new command that we can test
