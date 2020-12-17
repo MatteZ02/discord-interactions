@@ -4,7 +4,7 @@ import Discord from "discord.js";
 interface ApplicationCommandOption {
   name: string;
   description: string;
-  type: 1 | 2 | 3 | 4 | 5;
+  type: number;
   required: boolean;
   choices?: { name: string; value: string }[];
 }
