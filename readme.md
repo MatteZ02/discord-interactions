@@ -162,7 +162,9 @@ client.on("ready", () => {
 
 // attach and event listener for the interactionCreate event
 client.on("interactionCreate", (interaction) => {
-
+    if (interaction.name === "ping") {
+        interaction.channel.send("pong");
+    }
 });
 
 // login
