@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import Discord from "discord.js";
 
 interface ApplicationCommandOption {
@@ -11,6 +10,12 @@ interface ApplicationCommandOption {
 
 interface ApplicationCommand {}
 
+interface error {
+  code: number;
+  errors: object;
+  message: string;
+}
+
 interface params {
   name: string;
   description: string;
@@ -22,10 +27,23 @@ declare module "discord-interactions" {
     constructor(token: string, clientID: string);
     private token: string;
     private clientID: string;
-    public getCommands(commandID?: string, guildID?: string): Promise<ApplicationCommand>;
-    public createCommand(options: params, guildID?: string): Promise<ApplicationCommand>;
-    public editCommand(options: params, commandID: string, guildID?: string): Promise<ApplicationCommand>;
-    public deleteCommand(commandID: string, guildID?: string): Promise<ApplicationCommand>;
+    public getCommands(
+      commandID?: string,
+      guildID?: string
+    ): Promise<ApplicationCommand>;
+    public createCommand(
+      options: params,
+      guildID?: string
+    ): Promise<ApplicationCommand>;
+    public editCommand(
+      options: params,
+      commandID: string,
+      guildID?: string
+    ): Promise<ApplicationCommand>;
+    public deleteCommand(
+      commandID: string,
+      guildID?: string
+    ): Promise<ApplicationCommand[] | error>;
   }
 
   export interface interactionCreate {
