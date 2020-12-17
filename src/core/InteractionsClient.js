@@ -10,10 +10,11 @@ class InteractionsClient {
 
   async getCommands(commandID, guildID) {
     const url = guildID
-      ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
-      : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
+      ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands`
+      : `${apiUrl}/applications/${this.clientID}/commands`;
 
-  return await axios.get(url, undefined, { headers: `Bot ${this.token}` });
+    if (commandID) url += `/${commandID}`;
+    return await axios.get(url, undefined, { headers: `Bot ${this.token}` });
   }
 
   async createCommand(options, guildID) {
