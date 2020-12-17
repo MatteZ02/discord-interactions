@@ -39,13 +39,4 @@ declare module "discord-slash-commands-client" {
       guildID?: string
     ): Promise<ApplicationCommand[]>;
   }
-
-  export interface interactionCreate {
-    channel: Discord.TextChannel;
-    guild: Discord.Guild;
-    member: Discord.GuildMember | null;
-    author: Discord.User | null;
-    name: string;
-    options: { value: string; name: string }[] | null;
-  }
 }
