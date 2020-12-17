@@ -16,7 +16,7 @@ interface ApplicationOptions {
   options?: ApplicationCommandOption[];
 }
 
-declare module "discord-interactions" {
+declare module "discord-slash-commands-client" {
   export class Client {
     constructor(token: string, clientID: string);
     private token: string;

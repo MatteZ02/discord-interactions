@@ -1,12 +1,12 @@
-# discord-interactions
+# discord-slash-commands-client
 
 An easy way to create and manage discord slash-commands.
 
 # Usage
 
 ```js
-const interactions = require("discord-interactions");
-// TypeScript: import interactions from "discord-interactions";
+const interactions = require("discord-slash-commands-client");
+// TypeScript: import interactions from "discord-slash-commands-client";
 
 const client = new interactions.Client(
   "you unique bot token",
@@ -112,7 +112,7 @@ You can listen to the interactionCreate event which will fire every time someone
 
 ```js
 const Discord = require("discord.js");
-const interactions = require("discord-interactions");
+const interactions = require("discord-slash-commands");
 
 // create a new client
 const client = new Discord.Client();

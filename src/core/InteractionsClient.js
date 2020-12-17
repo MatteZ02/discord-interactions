@@ -5,11 +5,11 @@ const apiUrl = "https://discord.com/api/v8";
 class InteractionsClient {
   constructor(token, clientID) {
     if (!token) {
-      console.log("Discord-interactions | No token provided");
+      console.log("discord-slash-commands-client | No token provided");
       process.exit(1);
     }
     if (!clientID) {
-      console.log("Discord-interactions | No clientID provided");
+      console.log("discord-slash-commands-client | No clientID provided");
       process.exit(1);
     }
     this.token = token;
