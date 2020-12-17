@@ -10,13 +10,7 @@ interface ApplicationCommandOption {
 
 interface ApplicationCommand {}
 
-interface error {
-  code: number;
-  errors: object;
-  message: string;
-}
-
-interface params {
+interface ApplicationOptions {
   name: string;
   description: string;
   options?: ApplicationCommandOption[];
@@ -32,18 +26,18 @@ declare module "discord-interactions" {
       guildID?: string
     ): Promise<ApplicationCommand>;
     public createCommand(
-      options: params,
+      options: ApplicationOptions,
       guildID?: string
     ): Promise<ApplicationCommand>;
     public editCommand(
-      options: params,
+      options: ApplicationOptions,
       commandID: string,
       guildID?: string
     ): Promise<ApplicationCommand>;
     public deleteCommand(
       commandID: string,
       guildID?: string
-    ): Promise<ApplicationCommand[] | error>;
+    ): Promise<ApplicationCommand[]>;
   }
 
   export interface interactionCreate {
