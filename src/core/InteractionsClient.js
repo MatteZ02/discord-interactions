@@ -14,14 +14,14 @@ class InteractionsClient {
       : `${apiUrl}/applications/${this.clientID}/commands`;
 
     if (commandID) url += `/${commandID}`;
-    
+
     try {
       const res = await axios
         .get(url, { headers: { Authorization: `Bot ${this.token}` } })
         .catch(console.error);
       return res.data;
     } catch (e) {
-      throw new Error(e.data);
+      return e.data;
     }
   }
 
@@ -36,7 +36,7 @@ class InteractionsClient {
       });
       return res.data;
     } catch (e) {
-      throw new Error(e.data);
+      return e.data;
     }
   }
 
@@ -53,7 +53,7 @@ class InteractionsClient {
         .catch(console.error);
       return res.data;
     } catch (e) {
-      throw new Error(e.data);
+      return e.data;
     }
   }
 
@@ -70,7 +70,7 @@ class InteractionsClient {
         .catch(console.error);
       return res.data;
     } catch (e) {
-      throw new Error(e.data);
+      return e.data;
     }
   }
 }
