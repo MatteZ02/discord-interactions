@@ -9,7 +9,7 @@ class InteractionsClient {
   }
 
   async getCommands(commandID, guildID) {
-    const url = guildID
+    let url = guildID
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands`
       : `${apiUrl}/applications/${this.clientID}/commands`;
 
@@ -64,7 +64,7 @@ class InteractionsClient {
 
     try {
       const res = await axios
-        .delete(url, undefined, {
+        .delete(url, {
           headers: { Authorization: `Bot ${this.token}` },
         })
         .catch(console.error);
