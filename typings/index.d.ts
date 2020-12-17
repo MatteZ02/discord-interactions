@@ -22,10 +22,10 @@ declare module "discord-interactions" {
     constructor(token: string, clientID: string);
     private token: string;
     private clientID: string;
-    public getCommands(commandID?: string, guildID?: string): Promise<AxiosResponse>;
-    public createCommand(options: params, guildID?: string): Promise<AxiosResponse>;
-    public editCommand(options: params, commandID: string, guildID?: string): Promise<AxiosResponse>;
-    public deleteCommand(commandID: string, guildID?: string): Promise<AxiosResponse>;
+    public getCommands(commandID?: string, guildID?: string): Promise<ApplicationCommand>;
+    public createCommand(options: params, guildID?: string): Promise<ApplicationCommand>;
+    public editCommand(options: params, commandID: string, guildID?: string): Promise<ApplicationCommand>;
+    public deleteCommand(commandID: string, guildID?: string): Promise<ApplicationCommand>;
   }
 
   export interface interactionCreate {

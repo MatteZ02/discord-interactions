@@ -14,9 +14,10 @@ class InteractionsClient {
       : `${apiUrl}/applications/${this.clientID}/commands`;
 
     if (commandID) url += `/${commandID}`;
-    return await axios
+    const res = await axios
       .get(url, { headers: { Authorization: `Bot ${this.token}` } })
       .catch(console.error);
+      return res.data;
   }
 
   async createCommand(options, guildID) {
@@ -24,9 +25,10 @@ class InteractionsClient {
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands`
       : `${apiUrl}/applications/${this.clientID}/commands`;
 
-    return await axios
+    const res = await axios
       .post(url, options, { headers: { Authorization: `Bot ${this.token}` } })
       .catch(console.error);
+      return res.data;
   }
 
   async editCommand(options, commandID, guildID) {
@@ -34,9 +36,10 @@ class InteractionsClient {
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
       : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
 
-    return await axios
+      const res = await axios
       .patch(url, options, { headers: { Authorization: `Bot ${this.token}` } })
       .catch(console.error);
+      return res.data;
   }
 
   async deleteCommand(commandID, guildID) {
@@ -44,9 +47,10 @@ class InteractionsClient {
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
       : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
 
-    return await axios
+      const res = await axios
       .delete(url, undefined, { headers: { Authorization: `Bot ${this.token}` } })
       .catch(console.error);
+      return res.data;
   }
 }
 
