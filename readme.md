@@ -115,7 +115,7 @@ const Discord = require("discord.js");
 const interactions = require("discord-interactions");
 
 // create a new client
-const client = new Discord.client();
+const client = new Discord.Client();
 const token = "Your unique bot token";
 
 // attach the interaction client to discord.js client
