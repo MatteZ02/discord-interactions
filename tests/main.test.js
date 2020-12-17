@@ -1,12 +1,12 @@
 const Discord = require("discord.js");
-const interactions = require("discord-interactions");
+const interactions = require("../src/index");
 
 // create a new client
-const client = new Discord.client();
-const token = "Your unique bot token";
+const client = new Discord.Client();
+const token = "";
 
 // attach the interaction client to discord.js client
-client.interactions = new interactions.Client(token, "You bots user id");
+client.interactions = new interactions.Client(token, "");
 
 // attach and event listener for the ready event
 client.on("ready", () => {
@@ -44,12 +44,12 @@ client.on("ready", () => {
             required: false
         }
     ]
-}).then(console.log);
+}, "489111553321336832").then(console.log);
 });
 
 // attach and event listener for the interactionCreate event
 client.on("interactionCreate", (interaction) => {
-
+    console.log(interaction)
 });
 
 // login
