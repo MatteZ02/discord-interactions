@@ -177,5 +177,7 @@ guild: Discord.Guild;// The guild where this interaction occured
 member: Discord.GuildMember | null;// The guild member who issued the interaction (will be null if we cannot obtain a guildMember)
 author: Discord.User | null;// The user who issued the interaction (will be null if we cannot obtain an user)
 name: string;// name of this command
+content: string;// content of this command (everything after the main command name)
+createdTimestamp: number;// timestamp of this command being used
 options: { value: string; name: string }[] | null;// list of options this user inputted to the command
 ```
