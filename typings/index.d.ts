@@ -18,7 +18,7 @@ interface params {
 }
 
 declare module "discord-interactions" {
-  export class InteractionsClient {
+  export class Client {
     constructor(token: string, clientID: string);
     private token: string;
     private clientID: string;
