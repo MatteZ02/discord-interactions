@@ -1,6 +1,6 @@
 {
   "name": "discord-slash-commands-client",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple way to interact and manage discord slash-commands",
   "main": "src/index.js",
   "types": "typings/index.d.ts",
@@ -22,5 +22,12 @@
   },
   "devDependencies": {
     "discord.js": "https://github.com/MatteZ02/discord.js"
-  }
+  },
+  "keywords": [
+    "discord",
+    "slash-commands",
+    "disord-slash-commands",
+    "discord-api",
+    "discord.js"
+  ]
 }
