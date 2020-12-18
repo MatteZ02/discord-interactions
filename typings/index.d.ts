@@ -1,5 +1,3 @@
-import Discord from "discord.js";
-
 interface ApplicationCommandOption {
   name: string;
   description: string;
