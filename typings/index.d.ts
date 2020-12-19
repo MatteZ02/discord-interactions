@@ -1,20 +1,35 @@
-interface ApplicationCommandOption {
-  name: string;
-  description: string;
-  type: number;
-  required: boolean;
-  choices?: { name: string; value: string }[];
-}
-
-interface ApplicationCommand {}
-
-interface ApplicationOptions {
-  name: string;
-  description: string;
-  options?: ApplicationCommandOption[];
-}
-
 declare module "discord-slash-commands-client" {
+  // ApplicationCommand https://discord.com/developers/docs/interactions/slash-commands#applicationcommand
+  interface ApplicationCommand {
+    id: string;
+    application_id: string;
+    name: string;
+    description: string;
+    options?: ApplicationCommandOption[];
+  }
+
+  // ApplicationCommandOption https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoption
+  interface ApplicationCommandOption {
+    name: string;
+    description: string;
+    type: number;
+    required: boolean;
+    choices?: ApplicationCommandOptionChoice[];
+  }
+
+  // ApplicationCommandOptionType https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype
+
+  //type ApplicationCommandOptionType = "SUB_COMMAND": 1 | "SUB_COMMAND_GROUP": 2 | "STRING": 3 | "INTEGER": 4 | "BOOLEAN": 5 |  "USER": 6 | "CHANNEL": 7 | "ROLE": 8;
+  interface ApplicationCommandOptionChoice {
+    name: string;
+    value: string;
+  }
+  interface ApplicationOptions {
+    name: string;
+    description: string;
+    options?: ApplicationCommandOption[];
+  }
+
   export class Client {
     constructor(token: string, clientID: string);
     private token: string;

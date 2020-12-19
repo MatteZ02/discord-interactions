@@ -17,8 +17,16 @@ class InteractionsClient {
   }
 
   async getCommands(commandID, guildID) {
-    if (commandID && typeof commandID !== "string") throw "commandID received but wasn't of type string. received: " + typeof commandID;
-    if (guildID && typeof guildID !== "string") throw "guildID received but wasn't of type string. received: " + typeof guildID;
+    if (commandID && typeof commandID !== "string")
+      throw (
+        "commandID received but wasn't of type string. received: " +
+        typeof commandID
+      );
+    if (guildID && typeof guildID !== "string")
+      throw (
+        "guildID received but wasn't of type string. received: " +
+        typeof guildID
+      );
     const url = guildID
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands`
       : `${apiUrl}/applications/${this.clientID}/commands`;
@@ -28,14 +36,15 @@ class InteractionsClient {
     const res = await axios
       .get(url, { headers: { Authorization: `Bot ${this.token}` } })
       .catch(console.error);
-      if (!res) throw "An error has occured!"
+    if (!res) throw "An error has occured!";
     return res.data;
   }
 
   async createCommand(options, guildID) {
     if (typeof options !== "object")
       throw "options must be of type object. Received: " + typeof options;
-      if (!options.name || !options.description) throw "options is missing name or description property!";
+    if (!options.name || !options.description)
+      throw "options is missing name or description property!";
     const url = guildID
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands`
       : `${apiUrl}/applications/${this.clientID}/commands`;
@@ -43,7 +52,7 @@ class InteractionsClient {
     const res = await axios.post(url, options, {
       headers: { Authorization: `Bot ${this.token}` },
     });
-    if (!res) throw "An error has occured!"
+    if (!res) throw "An error has occured!";
     return res.data;
   }
 
@@ -52,8 +61,13 @@ class InteractionsClient {
       throw "options must be of type object. Received: " + typeof options;
     if (typeof commandID !== "string")
       throw "commandID must be of type string. Received: " + typeof commandID;
-      if (!options.name || !options.description) throw "options is missing name or description property!";
-      if (guildID && typeof guildID !== "string") throw "guildID received but wasn't of type string. received: " + typeof guildID;
+    if (!options.name || !options.description)
+      throw "options is missing name or description property!";
+    if (guildID && typeof guildID !== "string")
+      throw (
+        "guildID received but wasn't of type string. received: " +
+        typeof guildID
+      );
     const url = guildID
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
       : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
@@ -63,7 +77,7 @@ class InteractionsClient {
         headers: { Authorization: `Bot ${this.token}` },
       })
       .catch(console.error);
-      if (!res) throw "An error has occured!"
+    if (!res) throw "An error has occured!";
     return res.data;
   }
 
@@ -75,11 +89,11 @@ class InteractionsClient {
       : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
 
     const res = await axios
-      .delete(url, undefined, {
+      .delete(url, {
         headers: { Authorization: `Bot ${this.token}` },
       })
       .catch(console.error);
-      if (!res) throw "An error has occured!"
+    if (!res) throw "An error has occured!";
     return res.data;
   }
 }

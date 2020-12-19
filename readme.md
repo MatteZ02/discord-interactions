@@ -13,7 +13,7 @@ const client = new interactions.Client(
   "your bots user id"
 );
 // list all your existing commands.
-client.getCommands().then(console.log);
+client.getCommands().catch(console.error).then(console.log);
 
 // will create a new command and log its data. If a command with this name already exist will that be overwritten.
 client
@@ -21,6 +21,7 @@ client
     name: "unique command name",
     description: "description for this unique command",
   })
+  .catch(console.error)
   .then(console.log);
 
 // will edit the details of a command.
@@ -29,10 +30,14 @@ client
     { name: "new command name", description: "new command description" },
     "id of the command you wish to edit"
   )
+  .catch(console.error)
   .then(console.log);
 
 // will delete a command
-client.deleteCommand("id of the command you wish to delete").then(console.log);
+client
+  .deleteCommand("id of the command you wish to delete")
+  .catch(console.error)
+  .then(console.log);
 ```
 
 # API
@@ -123,48 +128,51 @@ client.interactions = new interactions.Client(token, "You bots user id");
 
 // attach and event listener for the ready event
 client.on("ready", () => {
-    console.log("Client is ready!");
+  console.log("Client is ready!");
 
-// Create a new command that we can test
-    client.interactions.createCommand({
-    name: "blep",
-    description: "Send a random adorable animal photo",
-    options: [
+  // Create a new command that we can test
+  client.interactions
+    .createCommand({
+      name: "blep",
+      description: "Send a random adorable animal photo",
+      options: [
         {
-            name: "animal",
-            description: "The type of animal",
-            type: 3,
-            required: true,
-            choices: [
-                {
-                    name: "Dog",
-                    value: "animal_dog"
-                },
-                {
-                    name: "Cat",
-                    value: "animal_dog"
-                },
-                {
-                    name: "Penguin",
-                    value: "animal_penguin"
-                }
-            ]
+          name: "animal",
+          description: "The type of animal",
+          type: 3,
+          required: true,
+          choices: [
+            {
+              name: "Dog",
+              value: "animal_dog",
+            },
+            {
+              name: "Cat",
+              value: "animal_dog",
+            },
+            {
+              name: "Penguin",
+              value: "animal_penguin",
+            },
+          ],
         },
         {
-            name: "only_smol",
-            description: "Whether to show only baby animals",
-            type: 5,
-            required: false
-        }
-    ]
-}).then(console.log);
+          name: "only_smol",
+          description: "Whether to show only baby animals",
+          type: 5,
+          required: false,
+        },
+      ],
+    })
+    .catch(console.error)
+    .then(console.log);
 });
 
 // attach and event listener for the interactionCreate event
 client.on("interactionCreate", (interaction) => {
-    if (interaction.name === "ping") {
-        interaction.channel.send("pong");
-    }
+  if (interaction.name === "ping") {
+    interaction.channel.send("pong");
+  }
 });
 
 // login
