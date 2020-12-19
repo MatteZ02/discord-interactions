@@ -50,6 +50,6 @@ declare module "discord-slash-commands-client" {
     public deleteCommand(
       commandID: string,
       guildID?: string
-    ): Promise<ApplicationCommand[]>;
+    ): Promise<boolean>;
   }
 }

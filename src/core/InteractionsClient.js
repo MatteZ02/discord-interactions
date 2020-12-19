@@ -94,7 +94,7 @@ class InteractionsClient {
       })
       .catch(console.error);
     if (!res) throw "An error has occured!";
-    return res.data;
+    return true;
   }
 }
 
