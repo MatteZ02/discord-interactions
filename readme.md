@@ -2,6 +2,9 @@
 
 An easy way to create and manage discord slash-commands.
 
+# Support
+
+You can contact us on our [Discord server](https://discord.gg/2qFkF3qqmu)
 # Usage
 
 ```js
