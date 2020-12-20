@@ -12,7 +12,7 @@
     "url": "git+https://github.com/MatteZ02/discord-interactions.git"
   },
   "author": "MatteZ02",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/MatteZ02/discord-interactions/issues"
   },
