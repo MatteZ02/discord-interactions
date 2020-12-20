@@ -5,6 +5,7 @@ An easy way to create and manage discord slash-commands.
 # Support
 
 You can contact us on our [Discord server](https://discord.gg/2qFkF3qqmu)
+
 # Usage
 
 ```js
@@ -136,36 +137,8 @@ client.on("ready", () => {
   // Create a new command that we can test
   client.interactions
     .createCommand({
-      name: "blep",
-      description: "Send a random adorable animal photo",
-      options: [
-        {
-          name: "animal",
-          description: "The type of animal",
-          type: 3,
-          required: true,
-          choices: [
-            {
-              name: "Dog",
-              value: "animal_dog",
-            },
-            {
-              name: "Cat",
-              value: "animal_dog",
-            },
-            {
-              name: "Penguin",
-              value: "animal_penguin",
-            },
-          ],
-        },
-        {
-          name: "only_smol",
-          description: "Whether to show only baby animals",
-          type: 5,
-          required: false,
-        },
-      ],
+      name: "ping",
+      description: "ping pong",
     })
     .catch(console.error)
     .then(console.log);
