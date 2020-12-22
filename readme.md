@@ -86,7 +86,8 @@ Properties marked with `?` are optional.
         {
         name: "name of this option",
         description: "description for this option",
-        type: 1,// Type for this option
+        type: 1,// Type for this option. for a list of types see https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype
+        default: true,
         required: true,
         choices?: [
             {
@@ -121,7 +122,7 @@ You can listen to the interactionCreate event which will fire every time someone
 
 ```js
 const Discord = require("discord.js");
-const interactions = require("discord-slash-commands");
+const interactions = require("discord-slash-commands-client");
 
 // create a new client
 const client = new Discord.Client();

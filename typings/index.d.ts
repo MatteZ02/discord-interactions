@@ -13,8 +13,10 @@ declare module "discord-slash-commands-client" {
     name: string;
     description: string;
     type: number;
-    required: boolean;
+    default?: boolean;
+    required?: boolean;
     choices?: ApplicationCommandOptionChoice[];
+    options?: ApplicationCommandOption[];
   }
 
   // ApplicationCommandOptionType https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype
