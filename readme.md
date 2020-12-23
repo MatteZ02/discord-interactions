@@ -17,7 +17,7 @@ const client = new interactions.Client(
   "your bots user id"
 );
 // list all your existing commands.
-client.getCommands().catch(console.error).then(console.log);
+client.getCommands().then(console.log).catch(console.error);
 
 // will create a new command and log its data. If a command with this name already exist will that be overwritten.
 client
@@ -25,8 +25,8 @@ client
     name: "unique command name",
     description: "description for this unique command",
   })
-  .catch(console.error)
-  .then(console.log);
+  .then(console.log)
+  .catch(console.error);
 
 // will edit the details of a command.
 client
@@ -34,14 +34,14 @@ client
     { name: "new command name", description: "new command description" },
     "id of the command you wish to edit"
   )
-  .catch(console.error)
-  .then(console.log);
+  .then(console.log)
+  .catch(console.error);
 
 // will delete a command
 client
   .deleteCommand("id of the command you wish to delete")
-  .catch(console.error)
-  .then(console.log);
+  .then(console.log)
+  .catch(console.error);
 ```
 
 # API
@@ -141,8 +141,8 @@ client.on("ready", () => {
       name: "ping",
       description: "ping pong",
     })
-    .catch(console.error)
-    .then(console.log);
+    .then(console.log)
+    .catch(console.error);
 });
 
 // attach and event listener for the interactionCreate event

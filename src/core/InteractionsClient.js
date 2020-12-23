@@ -33,10 +33,9 @@ class InteractionsClient {
 
     if (commandID) url += `/${commandID}`;
 
-    const res = await axios
-      .get(url, { headers: { Authorization: `Bot ${this.token}` } })
-      .catch(console.error);
-    if (!res) throw "An error has occured!";
+    const res = await axios.get(url, {
+      headers: { Authorization: `Bot ${this.token}` }
+    });
     return res.data;
   }
 
@@ -52,7 +51,6 @@ class InteractionsClient {
     const res = await axios.post(url, options, {
       headers: { Authorization: `Bot ${this.token}` },
     });
-    if (!res) throw "An error has occured!";
     return res.data;
   }
 
@@ -72,12 +70,9 @@ class InteractionsClient {
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
       : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
 
-    const res = await axios
-      .patch(url, options, {
-        headers: { Authorization: `Bot ${this.token}` },
-      })
-      .catch(console.error);
-    if (!res) throw "An error has occured!";
+    const res = await axios.patch(url, options, {
+      headers: { Authorization: `Bot ${this.token}` },
+    });
     return res.data;
   }
 
@@ -88,13 +83,10 @@ class InteractionsClient {
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
       : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
 
-    const res = await axios
-      .delete(url, {
-        headers: { Authorization: `Bot ${this.token}` },
-      })
-      .catch(console.error);
-    if (!res) throw "An error has occured!";
-    return true;
+    const res = await axios.delete(url, {
+      headers: { Authorization: `Bot ${this.token}` },
+    });
+    return res.data;
   }
 }
 
