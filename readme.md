@@ -51,32 +51,31 @@ Guild commands update **instantly**. We recommend you use guild commands for qui
 
 [Discord api documentation on slash commands](https://discord.com/developers/docs/interactions/slash-commands)
 
-### getCommands(commandID?: string, guildID?: string)
+### getCommands(options: getCommandOptions) returns Promise< array of ApplicationOptions>
 
-- `commandID` - id of the command you wish to obtain.
-- `guildID` - id of the guild this command is created for.
+- `getCommandsOptions` - List of options can be found [here](#options).
 
-### createCommand(options: ApplicationOptions, guildID?: string)
+### createCommand(options: ApplicationCommandOptions, guildID?: string) returns Promise<ApplicationOptions>
 
 - `ApplicationOptions` - List of options can be found [here](#options).
 - `guildID` - guild to create this command on.
 
-### editCommand(options: ApplicationOptions, commandID: string, guildID?: string)
+### editCommand(options: ApplicationCommandOptions, commandID: string, guildID?: string) returns Promise<ApplicationOptions>
 
 - `ApplicationOptions` - List of options can be found [here](#options).
 - `commandID` - ID of the command you wish to edit.
 - `guildID` - If the command is a part of a guild you must pass the guildID here.
 
-### deleteCommand(commandID: string, guildID?: string)
+### deleteCommand(commandID: string, guildID?: string)  returns Promise<boolean>
 
 - `commandID` - ID of the command you wish to delete.
 - `guildID` - If the command is a part of a guild you must pass the guildID here.
 
 # Options
 
-### ApplicationOptions
-
 Properties marked with `?` are optional.
+
+### ApplicationCommandOption
 
 ```js
 {
@@ -87,8 +86,8 @@ Properties marked with `?` are optional.
         name: "name of this option",
         description: "description for this option",
         type: 1,// Type for this option. for a list of types see https://discord.com/developers/docs/interactions/slash-commands#applicationcommandoptiontype
-        default: true,
-        required: true,
+        default?: true,
+        required?: true,
         choices?: [
             {
                 name: "string to prefill for this choice",
@@ -97,6 +96,23 @@ Properties marked with `?` are optional.
         ]
         }
     ]
+}
+```
+
+```js
+{
+  name: "name of the command";
+  description: "description of the command";
+  options?: Array of ApplicationCommandOption;
+}
+```
+
+### getCommandsOptions
+
+```js
+{
+  commandID?: "id of the command you wish to get",
+  guildID?: "if the command is a part of a guild u should put the guild id here"
 }
 ```
 

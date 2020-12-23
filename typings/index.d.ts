@@ -1,4 +1,9 @@
 declare module "discord-slash-commands-client" {
+  interface getCommandsOptions {
+    commandID?: string;
+    guildID?: string;
+  }
+
   // ApplicationCommand https://discord.com/developers/docs/interactions/slash-commands#applicationcommand
   interface ApplicationCommand {
     id: string;
@@ -39,7 +44,7 @@ declare module "discord-slash-commands-client" {
     public getCommands(
       commandID?: string,
       guildID?: string
-    ): Promise<ApplicationCommand>;
+    ): Promise<ApplicationCommand[] | ApplicationCommand>;
     public createCommand(
       options: ApplicationOptions,
       guildID?: string
@@ -49,9 +54,6 @@ declare module "discord-slash-commands-client" {
       commandID: string,
       guildID?: string
     ): Promise<ApplicationCommand>;
-    public deleteCommand(
-      commandID: string,
-      guildID?: string
-    ): Promise<boolean>;
+    public deleteCommand(commandID: string, guildID?: string): Promise<boolean>;
   }
 }

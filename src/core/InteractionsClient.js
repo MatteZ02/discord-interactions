@@ -16,22 +16,24 @@ class InteractionsClient {
     this.clientID = clientID;
   }
 
-  async getCommands(commandID, guildID) {
-    if (commandID && typeof commandID !== "string")
+  async getCommands(options) {
+    if (typeof options !== "object")
+      throw "options must be of type object. Received: " + typeof options;
+    if (options.commandID && typeof options.commandID !== "string")
       throw (
         "commandID received but wasn't of type string. received: " +
-        typeof commandID
+        typeof options.commandID
       );
-    if (guildID && typeof guildID !== "string")
+    if (options.guildID && typeof options.guildID !== "string")
       throw (
         "guildID received but wasn't of type string. received: " +
-        typeof guildID
+        typeof options.guildID
       );
-    const url = guildID
-      ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands`
+    let url = options.guildID
+      ? `${apiUrl}/applications/${this.clientID}/guilds/${options.guildID}/commands`
       : `${apiUrl}/applications/${this.clientID}/commands`;
 
-    if (commandID) url += `/${commandID}`;
+    if (options.commandID) url += `/${options.commandID}`;
 
     const res = await axios.get(url, {
       headers: { Authorization: `Bot ${this.token}` }
