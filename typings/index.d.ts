@@ -42,8 +42,7 @@ declare module "discord-slash-commands-client" {
     private token: string;
     private clientID: string;
     public getCommands(
-      commandID?: string,
-      guildID?: string
+      options?: getCommandsOptions
     ): Promise<ApplicationCommand[] | ApplicationCommand>;
     public createCommand(
       options: ApplicationOptions,

@@ -16,7 +16,7 @@ class InteractionsClient {
     this.clientID = clientID;
   }
 
-  async getCommands(options) {
+  async getCommands(options = {}) {
     if (typeof options !== "object")
       throw "options must be of type object. Received: " + typeof options;
     if (options.commandID && typeof options.commandID !== "string")
