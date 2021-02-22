@@ -18,17 +18,11 @@ class InteractionsClient {
 
   async getCommands(options = {}) {
     if (typeof options !== "object")
-      throw "options must be of type object. Received: " + typeof options;
+      throw `options must be of type object. Received: ${typeof options}`;
     if (options.commandID && typeof options.commandID !== "string")
-      throw (
-        "commandID received but wasn't of type string. received: " +
-        typeof options.commandID
-      );
+      throw `commandID received but wasn't of type string. received: ${typeof options.commandID}`;
     if (options.guildID && typeof options.guildID !== "string")
-      throw (
-        "guildID received but wasn't of type string. received: " +
-        typeof options.guildID
-      );
+      throw `guildID received but wasn't of type string. received: ${typeof options.guildID}`;
     let url = options.guildID
       ? `${apiUrl}/applications/${this.clientID}/guilds/${options.guildID}/commands`
       : `${apiUrl}/applications/${this.clientID}/commands`;
@@ -36,14 +30,14 @@ class InteractionsClient {
     if (options.commandID) url += `/${options.commandID}`;
 
     const res = await axios.get(url, {
-      headers: { Authorization: `Bot ${this.token}` }
+      headers: { Authorization: `Bot ${this.token}` },
     });
     return res.data;
   }
 
   async createCommand(options, guildID) {
     if (typeof options !== "object")
-      throw "options must be of type object. Received: " + typeof options;
+      throw `options must be of type object. Received: ${typeof options}`;
     if (!options.name || !options.description)
       throw "options is missing name or description property!";
     const url = guildID
@@ -58,16 +52,13 @@ class InteractionsClient {
 
   async editCommand(options, commandID, guildID) {
     if (typeof options !== "object")
-      throw "options must be of type object. Received: " + typeof options;
+      throw `options must be of type object. Received: ${typeof options}`;
     if (typeof commandID !== "string")
-      throw "commandID must be of type string. Received: " + typeof commandID;
+      throw `commandID must be of type string. Received: ${typeof commandID}`;
     if (!options.name || !options.description)
       throw "options is missing name or description property!";
     if (guildID && typeof guildID !== "string")
-      throw (
-        "guildID received but wasn't of type string. received: " +
-        typeof guildID
-      );
+      throw `guildID received but wasn't of type string. received: ${typeof guildID}`;
     const url = guildID
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
       : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
@@ -80,7 +71,7 @@ class InteractionsClient {
 
   async deleteCommand(commandID, guildID) {
     if (typeof commandID !== "string")
-      throw "commandID must be of type string. Received: " + typeof commandID;
+      throw `commandID must be of type string. Received: ${typeof commandID}`;
     const url = guildID
       ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}`
       : `${apiUrl}/applications/${this.clientID}/commands/${commandID}`;
