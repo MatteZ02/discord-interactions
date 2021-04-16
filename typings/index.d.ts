@@ -74,14 +74,25 @@ declare module "discord-slash-commands-client" {
     constructor(token: string, clientID: string);
     private token: string;
     private clientID: string;
-    public getCommands(options?: getCommandsOptions): Promise<ApplicationCommand[] | ApplicationCommand>;
-    public createCommand(options: ApplicationOptions, guildID?: string): Promise<ApplicationCommand>;
-    public editCommand(options: ApplicationOptions, commandID: string, guildID?: string): Promise<ApplicationCommand>;
+    public getCommands(
+      options?: getCommandsOptions
+    ): Promise<ApplicationCommand[] | ApplicationCommand>;
+    public createCommand(
+      options: ApplicationOptions,
+      guildID?: string
+    ): Promise<ApplicationCommand>;
+    public editCommand(
+      options: ApplicationOptions,
+      commandID: string,
+      guildID?: string
+    ): Promise<ApplicationCommand>;
     public deleteCommand(commandID: string, guildID?: string): Promise<boolean>;
     public getCommandPermissions(
       guildID: string,
       commandID?: string
-    ): Promise<GuildApplicationCommandPermissions[] | GuildApplicationCommandPermissions>;
+    ): Promise<
+      GuildApplicationCommandPermissions[] | GuildApplicationCommandPermissions
+    >;
     public editCommandPermissions(
       permissions: ApplicationCommandPermissions[],
       guildID: string,
