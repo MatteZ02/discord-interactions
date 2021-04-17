@@ -88,6 +88,52 @@ class InteractionsClient {
     });
     return res.data;
   }
+
+  async getCommandPermissions(guildID, commandID) {
+    if (typeof guildID !== "string")
+      throw new Error(
+        "guildID must be of type string. Received: " +
+        typeof guildID
+      );
+    if (commandID && typeof commandID !== "string")
+      throw new Error(
+        "commandID received but wasn't of type string. received: " +
+        typeof commandID
+      );
+
+    const url = commandID
+      ? `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}/permissions`
+      : `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/permissions`;
+
+    const res = await axios.get(url, {
+      headers: { Authorization: `Bot ${this.token}` }
+    });
+
+    return res.data;
+  }
+
+  async editCommandPermissions(permissions, guildID, commandID) {
+    if (!Array.isArray(permissions))
+      throw new Error("permissions must be of type array. Received: " + typeof permissions);
+    if (typeof guildID !== "string")
+      throw new Error(
+        "guildID must be of type string. Received: " +
+        typeof guildID
+      );
+    if (typeof commandID !== "string")
+      throw new Error(
+        "commandID must be of type string. Received: " +
+        typeof commandID
+      );
+
+    const url = `${apiUrl}/applications/${this.clientID}/guilds/${guildID}/commands/${commandID}/permissions`;
+
+    const res = await axios.put(url, { permissions: permissions } , {
+      headers: { Authorization: `Bot ${this.token}` }
+    });
+
+    return res.data;
+  }
 }
 
 module.exports = InteractionsClient;
