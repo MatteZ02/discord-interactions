@@ -66,10 +66,21 @@ Guild commands update **instantly**. We recommend you use guild commands for qui
 - `commandID` - ID of the command you wish to edit.
 - `guildID` - If the command is a part of a guild you must pass the guildID here.
 
-### deleteCommand(commandID: string, guildID?: string)  returns Promise<boolean>
+### deleteCommand(commandID: string, guildID?: string) returns Promise<boolean>
 
 - `commandID` - ID of the command you wish to delete.
 - `guildID` - If the command is a part of a guild you must pass the guildID here.
+
+### getCommandPermissions(guildID: string, commandID?: string) returns Promise<GuildApplicationCommandPermissions[] | GuildApplicationCommandPermissions>;
+
+- `guildID` - the guild id to get permissions for
+- `commandID` - ID of the command you wish to get permissions for
+
+### editCommandPermissions(permissions: ApplicationCommandPermissions[], guildID: string, commandID: string) returns Promise<GuildApplicationCommandPermissions>
+
+- `ApplicationCommandPermissions` - list of permissions
+- `guildID` - The guild ID the permissions should apply for
+- `commandID` - The command ID the permissions should apply for
 
 # Options
 
@@ -116,7 +127,48 @@ Properties marked with `?` are optional.
 }
 ```
 
-### Types
+# Permissions
+
+### [ApplicationCommandPermissions](https://discord.com/developers/docs/interactions/slash-commands#applicationcommandpermissions)
+
+```ts
+/**
+ * Application command permissions allow you to enable or disable commands for specific users or roles within a guild.
+ */
+interface ApplicationCommandPermissions {
+  /** Id of the role or user */
+  id: string;
+
+  /** The type of permission (1 = Role, 2 = User) */
+  type: 1 | 2;
+
+  /** `true` to allow, `false` to disallow */
+  permission: boolean;
+}
+```
+
+### [GuildApplicationCommandPermissions](https://discord.com/developers/docs/interactions/slash-commands#guildapplicationcommandpermissions)
+
+```ts
+/**
+ * Returned when fetching the permissions for a command in a guild.
+ */
+interface GuildApplicationCommandPermissions {
+  /** Id of the command */
+  id: string;
+
+  /** Id of the application the command belongs to */
+  application_id: string;
+
+  /** Id of the guild */
+  guild_id: string;
+
+  /** Array of ApplicationCommandPermissions */
+  permissions: ApplicationCommandPermissions[];
+}
+```
+
+# Types
 
 You can find a list of Data Models and Types from [here](https://discord.com/developers/docs/interactions/slash-commands#data-models-and-types)
 
@@ -162,9 +214,24 @@ client.on("ready", () => {
 });
 
 // attach and event listener for the interactionCreate event
-client.on("interactionCreate", (interaction) => {
+client.on("interactionCreate", async (interaction) => {
   if (interaction.name === "ping") {
-    interaction.channel.send("pong");
+    // send an initial reply
+    await interaction.reply("Pong");
+
+    // send a followup
+    const messageId = await interaction.reply({
+      content: "Follow up message",
+      embeds: [new MessageEmbed().setDescription("Follow up test")],
+    });
+
+    setTimeout(() => {
+      // delete initial reply
+      interaction.delete();
+
+      // edit 1st followup
+      interaction.edit("Edited follow up message", messageId);
+    }, 5000);
   }
 });
 
@@ -175,12 +242,51 @@ client.login(token);
 ### interaction example response
 
 ```JS
-channel: Discord.TextChannel;// The channel where this interaction occured
-guild: Discord.Guild;// The guild where this interaction occured
+id: string;
+token: string;
+channel: Discord.TextChannel;// The channel where this interaction occurred
+guild: Discord.Guild;// The guild where this interaction occurred
 member: Discord.GuildMember | null;// The guild member who issued the interaction (will be null if we cannot obtain a guildMember)
 author: Discord.User | null;// The user who issued the interaction (will be null if we cannot obtain an user)
 name: string;// name of this command
 content: string;// content of this command (everything after the main command name)
 createdTimestamp: number;// timestamp of this command being used
 options: { value: string; name: string }[] | null;// list of options this user inputted to the command
+/**
+ * Replies to this Interaction.
+ *
+ * **Note:** Ephemeral messages don't appear to support embeds at this time.
+ * @arg input - A message string, embed array, or object containing both
+ * @arg ephemeral - Make the reply viewable only to the command sender. If false, reply is public
+ * @returns A Promise that resolves a `messageId` which can be used with `.edit(...)` and `.delete(...)`
+ */
+reply: (
+  input?: string | MessageEmbed[] | { content: string; embeds: MessageEmbed[] },
+  ephemeral?: boolean,
+) => Promise<string>;
+/**
+ * Edit a previous reply to this Interaction
+ *
+ * **Note:** Ephemeral messages don't appear to support embeds at this time.
+ * @arg input - A message string, embed array, or object containing both
+ * @arg messageId - The id of the message to delete. If omitted, the original reply message is deleted.
+ */
+edit: (
+  input?: string | MessageEmbed[] | { content: string; embeds: MessageEmbed[] },
+  messageId?: string,
+) => Promise<void>;
+/**
+ * Sends a simple reply that makes the bot say "is thinking..."
+ *
+ * **Note:** You must use `.edit(...)` if you want to update the reply with an actual message later on.
+ * @arg ephemeral - Make the reply viewable only to the command sender. If false, reply is public
+ */
+thinking: (ephemeral?: boolean) => Promise<void>;
+/**
+ * Deletes a reply to the Interaction
+ *
+ * **Note:** You cannot delete ephemeral messages.
+ * @arg messageId - The id of the message to delete. If omitted, the original reply message is deleted.
+ */
+delete: (messageId?: string) => Promise<void>;
 ```
