@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const interactions = require("../src/index");
+const interactions = require("../lib/index");
 
 // create a new client
 const client = new Discord.Client();
@@ -10,15 +10,15 @@ client.interactions = new interactions.Client(token, "714810592589905922");
 
 // attach and event listener for the ready event
 client.on("ready", () => {
-  console.log("Client is ready!");
+    console.log("Client is ready!");
 
-  // Create a new command that we can test
-  client.interactions.createCommand().catch(console.error).then(console.log);
+    // Create a new command that we can test
+    client.interactions.createCommand().catch(console.error).then(console.log);
 });
 
 // attach and event listener for the interactionCreate event
 client.on("interactionCreate", (interaction) => {
-  console.log(interaction);
+    console.log(interaction);
 });
 
 // login
