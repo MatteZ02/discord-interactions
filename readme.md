@@ -9,13 +9,14 @@ You can contact us on our [Discord server](https://discord.gg/2qFkF3qqmu)
 # Usage
 
 ```js
-const interactions = require("discord-slash-commands-client");
-// TypeScript: import interactions from "discord-slash-commands-client";
+const { Client } = require("discord-slash-commands-client");
+// TypeScript: import { Client } from "discord-slash-commands-client";
 
-const client = new interactions.Client(
+const client = new Client(
   "you unique bot token",
   "your bots user id"
 );
+
 // list all your existing commands.
 client.getCommands().then(console.log).catch(console.error);
 

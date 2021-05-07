@@ -2,15 +2,15 @@
     "name": "discord-slash-commands-client",
     "version": "1.2.0",
     "description": "A simple way to interact and manage discord slash-commands",
-    "main": "lib/index.js",
-    "types": "lib/index.d.ts",
+    "main": "./lib/cjs/index.js",
+    "module": "./lib/esm/index.js",
     "files": [
         "lib/**/*"
     ],
     "scripts": {
         "pretest": "npm run build",
         "test": "node tests/main.test.js",
-        "build": "tsc",
+        "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
         "prepare": "npm run build"
     },
     "repository": {

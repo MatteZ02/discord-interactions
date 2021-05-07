@@ -1,15 +1,15 @@
 {
     "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
+        "target": "ES2015",
+        "module": "ES2020",
         "declaration": true,
-        "outDir": "./lib",
+        "outDir": "./lib/esm",
 
         "strict": true,
 
         "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node"
     },
     "include": ["./src"],
     "exclude": ["node_modules", "**/__tests__/*"]

@@ -1,5 +1,5 @@
-import InteractionsClient from "./core/InteractionsClient";
-import {
+export { InteractionsClient as Client } from "./core/InteractionsClient";
+export {
     ApplicationCommand,
     ApplicationCommandOption,
     ApplicationCommandOptionChoice,
@@ -8,14 +8,3 @@ import {
     getCommandsOptions,
     GuildApplicationCommandPermissions,
 } from "./core/interfaces";
-
-export {
-    InteractionsClient as Client,
-    ApplicationCommand,
-    ApplicationCommandPermissions,
-    ApplicationOptions,
-    getCommandsOptions,
-    GuildApplicationCommandPermissions,
-    ApplicationCommandOption,
-    ApplicationCommandOptionChoice,
-};

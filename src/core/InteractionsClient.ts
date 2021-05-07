@@ -9,7 +9,7 @@ import {
 
 const apiUrl = "https://discord.com/api/v8";
 
-export default class InteractionsClient {
+export class InteractionsClient {
     private token: string;
     public clientID: string;
 
